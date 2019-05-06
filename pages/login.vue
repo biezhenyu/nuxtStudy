@@ -24,7 +24,7 @@
 
     <van-button type="primary" @click="login" class="login-btn">登录</van-button>
     <p>
-      <a class="register forget" style="float: left;" href="/reset">忘记密码</a>
+      <a class="register forget" style="float: left;" href="/reset">重置密码</a>
       <a class="register" href="/register">注册</a>
     </p>
    
