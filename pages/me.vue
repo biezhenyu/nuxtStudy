@@ -18,6 +18,8 @@
 
 <script>
 import homeHeader from '../components/Header'
+const {config} = require('../config')
+import {Toast} from 'vant'
 export default {
   data() {
     return {
@@ -28,9 +30,17 @@ export default {
     homeHeader
   },
   methods: {
-    confirm() {
-      this.loginOutShow = false
-      console.log('退出登录')
+    async confirm() {
+      
+      const {status, data} = await this.$axios.post(`${config[process.env.NODE_ENV].api}/users/loginOut`)
+      if (status === 200) {
+        if (data && data.code === 0) {
+          this.loginOutShow = false
+          // location.href = '/login'
+        }
+      } else {
+        Toast.fail(`服务器出错，错误码：${status}`)
+      }
     },
     cancel() {}
   }

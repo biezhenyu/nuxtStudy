@@ -71,6 +71,8 @@ router.post('/login', async (ctx, next) => {
 
 })
 
+
+// 获取用户信息
 router.get('/getUser', async (ctx, next) => {
 
   // isAuthenticated passport方法
@@ -94,6 +96,24 @@ router.get('/getUser', async (ctx, next) => {
       user: '',
       email: ''
     } 
+  }
+})
+
+// 退出登录
+router.post('/loginOut', async (ctx) => {
+  await ctx.logout()
+
+  if (!ctx.isAuthenticated) {
+
+    ctx.body = {
+      code: 0,
+      msg: '退出登录成功'
+    }
+  } else {
+    ctx.body = {
+      code: 407,
+      msg: '登录超时'
+    }
   }
 })
 
