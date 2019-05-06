@@ -1,5 +1,9 @@
 <template>
   <div class="login">
+    <van-nav-bar
+      class="nav-bar"
+      title="学生信息统计"
+    />
     <van-cell-group>
       <van-field
         v-model="username"
@@ -19,6 +23,11 @@
     </van-cell-group>
 
     <van-button type="primary" @click="login" class="login-btn">登录</van-button>
+    <p>
+      <a class="register forget" style="float: left;" href="/reset">忘记密码</a>
+      <a class="register" href="/register">注册</a>
+    </p>
+   
   </div>
 </template>
 
@@ -39,7 +48,10 @@ export default {
     },
     
     async _login() {
-      console.log(config[process.env.NODE_ENV].api)
+      if (!this.username || !this.password) {
+        Toast.fail(`请填写账号或者密码`)
+        return;
+      }
       const {status, data} = await this.$axios.post(`${config[process.env.NODE_ENV].api}/users/login`, {
         username: encodeURIComponent(this.username),
         password: CryptoJS.MD5(this.password).toString(),
@@ -59,9 +71,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import '../assets/less/bass.less';
 .login {
-  margin-top: 50px;
+  .nav-bar {
+    margin-bottom: 10px;
+  }
+  .van-hairline--bottom::after {
+    border-bottom: 0;
+  }
+  .register {
+    float: right;
+    .fs(12);
+    color: #07c160;
+    .mt(60);
+    .mr(100);
+  }
+  .forget {
+    .ml(60);
+  }
 }
 .login-btn {
   width: 90%;

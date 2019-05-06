@@ -36,7 +36,7 @@ export default {
       if (status === 200) {
         if (data && data.code === 0) {
           this.loginOutShow = false
-          // location.href = '/login'
+          sessionStorage.clear('active')
         }
       } else {
         Toast.fail(`服务器出错，错误码：${status}`)

@@ -18,11 +18,11 @@ export default {
   },
   methods: {
     go(url) {
-      localStorage.setItem('active', JSON.stringify(url))
+      sessionStorage.setItem('active', JSON.stringify(url))
     },
 
     _handleTabbar() {
-      const tabs = ['login', 'register']
+      const tabs = ['login', 'register', 'reset']
       this.tabBarShow = !tabs.some(item => item === this.$route.name)
     }
 
@@ -53,8 +53,8 @@ export default {
       doc.addEventListener('DOMContentLoaded', recalc, false);
     })(document, window);
 
-    if (localStorage.getItem('active')) {
-      let active = parseInt(localStorage.getItem('active'))
+    if (sessionStorage.getItem('active')) {
+      let active = parseInt(sessionStorage.getItem('active'))
       this.active = active
     }
 
