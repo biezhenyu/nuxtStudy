@@ -117,4 +117,33 @@ router.post('/loginOut', async (ctx) => {
   }
 })
 
+// 重置密码
+router.post('/reset', async (ctx) => {
+  const {password, username, lastpassword} = ctx.request.body
+  const user = await User.findOne({username})
+  if (lastpassword === user.password) {
+    
+    const info = await User.where({username})
+              .update({password: password})
+
+    if (info.ok === 1) {
+      ctx.body = {
+        code: 0,
+        msg: '重置密码成功'
+      } 
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '重置密码失败'
+      } 
+    }
+    
+  } else {
+    ctx.body = {
+      code: -1,
+      msg: '输入上一次密码错误'
+    } 
+  }
+})
+
 module.exports = router
