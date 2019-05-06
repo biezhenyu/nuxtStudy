@@ -1,0 +1,179 @@
+/*
+*    less的方法
+*/
+
+.fs(@px) {
+  font-size: unit(@px / 75, rem);
+}
+
+/*----- 宽度 -----*/
+.w(@px) {
+  width: unit(@px / 75, rem);
+}
+
+/*----- 高度 -----*/
+.h(@px) {
+  height: unit(@px / 75, rem);
+}
+.m_h(@px) {
+  min-height: unit(@px /75, rem);
+}
+
+/*----- 行高 -----*/
+.lh(@px) {
+  line-height: unit(@px / 75, rem);
+}
+
+/*----- 背景尺寸 -----*/
+.b_s(@px, @px) {
+  background-size: unit(@px / 75, rem) unit(@px / 75, rem);
+}
+/**
+* [背景尺寸，设置宽度，高度auto]
+ */
+.b_s1(@px) {
+  -webkit-background-size: unit(@px / 75, rem) auto;
+  background-size: unit(@px / 75, rem) auto;
+}
+
+.b_s2(@px) {
+  -webkit-background-size: auto unit(@px / 75, rem);
+  background-size: auto unit(@px / 75, rem);
+}
+
+/*----- margin -----*/
+.mt(@px) {
+  margin-top: unit(@px / 75, rem);
+}
+.mr(@px) {
+  margin-right: unit(@px / 75, rem);
+}
+.mb(@px) {
+  margin-bottom: unit(@px / 75, rem);
+}
+.ml(@px) {
+  margin-left: unit(@px / 75, rem);
+}
+.mlr(@px, @px) {
+  margin: unit(@px / 75, rem) unit(@px / 75, rem);
+}
+.m (@px) {
+  margin: unit(@px / 75, rem);
+}
+
+/*----- padding -----*/
+.pt(@px) {
+  padding-top: unit(@px / 75, rem);
+}
+.pr(@px) {
+  padding-right: unit(@px / 75, rem);
+}
+.pb(@px) {
+  padding-bottom: unit(@px / 75, rem);
+}
+.pl(@px) {
+  padding-left: unit(@px / 75, rem);
+}
+.plr(@px, @px1) {
+  padding: unit(@px / 75, rem) unit(@px1 / 75, rem);
+}
+.p (@px) {
+  padding: unit(@px / 75, rem);
+}
+
+/*----- 定位 -----*/
+.p_t(@px) {
+  top: unit(@px / 75, rem);
+}
+.p_b(@px) {
+  bottom: unit(@px / 75, rem);
+}
+.p_l(@px) {
+  left: unit(@px / 75, rem);
+}
+.p_r(@px) {
+  right: unit(@px / 75, rem);
+}
+
+/*----- 缩进 -----*/
+.t_i(@px) {
+  text-indent: unit(@px / 75, rem);
+}
+
+/*----- 圆角 -----*/
+.b_r(@px) {
+  -webkit-border-radius: unit(@px / 75, rem);
+  -moz-border-radius: unit(@px / 75, rem);
+  border-radius: unit(@px / 75, rem);
+}
+
+/*----- flex -----*/
+.fx(@px) {
+  flex: 0 0 unit(@px / 75, rem);
+}
+
+.bgImg(@url) {
+  @base: '../../assets/images/';
+  background-image: url("@{base}@{url}.png");
+  @media (-webkit-min-device-pixel-ratio: 1),(min-device-pixel-ratio: 1) and (-webkit-min-device-pixel-ratio: 1.49),(min-device-pixel-ratio: 1.49) {
+    background-image: url("@{base}@{url}.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5) and (-webkit-min-device-pixel-ratio: 2.49),(min-device-pixel-ratio: 2.49) {
+    background-image: url("@{base}@{url}@2x.png");
+  }
+  @media (-webkit-min-device-pixel-ratio: 2.5),(min-device-pixel-ratio: 2.5) and (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    background-image: url("@{base}@{url}@3x.png");
+  }
+}
+
+// 1像素
+.border1px(@color) {
+  position: relative;
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-bottom: 1px solid @color;
+  }
+}
+    
+dl, dd, dt {margin: 0; padding: 0; border: 0;}
+input {
+  background-color: none;
+}
+input:focus {
+  outline: none;
+  border: 0;
+}
+button:focus {
+  border: 0;
+  outline: none;
+}
+
+// 改变input默认颜色
+.inputColor(@color) {
+  input::-webkit-input-placeholder {
+    color: @color;    
+  } 
+  input::-moz-placeholder {
+    color: @color;
+  }
+  input::-ms-input-placeholder {
+    color: @color;
+  }
+  textarea::-webkit-input-placeholder {
+    color: @color;    
+  }
+  textarea::-moz-placeholder {
+    color: @color;
+  }
+  textarea::-ms-input-placeholder {
+    color: @color;
+  }
+}
+input[type=button],input[type=text],input[type=password],input[type=number]{-webkit-appearance:none;outline:none}
+
+
