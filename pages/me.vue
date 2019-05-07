@@ -1,23 +1,27 @@
 <template>
   <div class="me">
-    
+    <homeHeader @loginOut="loginOutShow = true"></homeHeader>
     <button @click="add">添加</button>
 
   </div>
 </template>
 
 <script>
-
+import homeHeader from '../components/Header'
 const {config} = require('../config')
 import {Toast} from 'vant'
+import util from '../util/index.js'
 export default {
   data() {
     return {
-      
+      loginOutShow: false
     }
   },
-  components: {
+  created() {
     
+  },
+  components: {
+    homeHeader
   },
   methods: {
     
@@ -29,7 +33,21 @@ export default {
         age: 19,
         className: "五年一班",
         ino: "12312312312313233"})
-    }
+    },
+
+    async confirm() {
+      
+      const {status, data} = await this.$axios.post(`${config[process.env.NODE_ENV].api}/users/loginOut`)
+      if (status === 200) {
+        if (data && data.code === 0) {
+          this.loginOutShow = false
+          sessionStorage.clear('active')
+        }
+      } else {
+        Toast.fail(`服务器出错，错误码：${status}`)
+      }
+    },
+    cancel() {},
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <section class="student">
-    <homeHeader @loginOut="loginOutShow = true"></homeHeader>
+    <homeHeader @loginOut="loginOutShow = true" :name="user.name"></homeHeader>
     <van-tabs 
       class="student-tabs"
       v-model="active" 
@@ -97,6 +97,7 @@ export default {
       let {status, data} = await this.$axios.get(`${config[process.env.NODE_ENV].api}/users/getUser`)
       util.handleRequest(status, () => {
         this.user.email = data.email
+        this.user.name = data.username
         console.log(this.user)
       })
     },

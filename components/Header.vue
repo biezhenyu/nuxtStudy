@@ -1,24 +1,50 @@
 <template>
   <div class="homeHeader">
     <img class="icon" :src="src" alt="">
-    <span class="name">{{'张三'}}</span>
+    <span class="name">{{user.name}}</span>
     <span @click="loginOut" class="loginOut"></span>
   </div>
 </template>
 
 <script>
+const {config} = require('../config')
+import util from '../util/index.js'
 export default {
   name: 'home',
   data() {
     return {
-      src: require('../assets/images/head_portrait@2x.png')
+      src: require('../assets/images/head_portrait@2x.png'),
+      user: {
+        name: '',
+        email: '',
+        image: ''
+      },
     }
   },
-    
+
+  created() {
+    this._getUSer()
+  },
+
+  mounted() {
+
+  },
+
+
   methods: {
     loginOut() {
       this.$emit('loginOut')
-    }
+    },
+
+    async _getUSer() {
+      let {status, data} = await this.$axios.get(`${config[process.env.NODE_ENV].api}/users/getUser`)
+      util.handleRequest(status, () => {
+        this.user.email = data.email
+        this.user.name = data.username
+        console.log('this.user: ', this.user);
+        
+      })
+    },
   }
 }
 </script>
