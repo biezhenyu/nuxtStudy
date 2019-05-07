@@ -13,6 +13,8 @@
       <p>确定要退出当前登录状态吗？</p>
     </van-dialog>
 
+    <button @click="add">添加</button>
+
   </div>
 </template>
 
@@ -42,7 +44,17 @@ export default {
         Toast.fail(`服务器出错，错误码：${status}`)
       }
     },
-    cancel() {}
+    cancel() {},
+
+    async add() {
+      const {status, data} = await this.$axios.post(`${config[process.env.NODE_ENV].api}/student/addStudent`, {
+        name: "bzy",
+        photo: "nfjjdsfldsa",
+        age: 19,
+        className: "五年一班",
+        ino: "12312312312313233",
+        upDate: "2019-02-01"})
+    }
   }
 }
 </script>

@@ -15,7 +15,7 @@
       <van-field
         v-model="user.lastpassword"
         type="password"
-        label="密码"
+        label="上一次密码"
         :error-message="rules.lastpassword"
         @blur="verification('lastpassword')"
         placeholder="请输入密码"
@@ -25,7 +25,7 @@
       <van-field
         v-model="user.password"
         type="password"
-        label="密码"
+        label="新密码"
         :error-message="rules.password"
         @blur="verification('password')"
         placeholder="请输入密码"
@@ -71,7 +71,7 @@ export default {
     },
 
     async _register() {
-      if (this.password === this.lastpassword) {
+      if (this.user.password === this.user.lastpassword) {
         Toast.fail(`请使用不同的密码`)
         return;
       }
