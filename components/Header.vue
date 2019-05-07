@@ -35,6 +35,7 @@ export default {
   color: #FFFFFF;
   .fs(32);
   .ml(-(660)/2);
+  .mt(40);
   background:linear-gradient(159deg,rgba(85,190,249,1) 0%,rgba(52,223,203,1) 82%,rgba(57,226,186,1) 100%);
 
   .icon {

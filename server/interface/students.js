@@ -30,8 +30,7 @@ router.post('/addStudent', async (ctx) => {
     photo,
     age,
     className,
-    ino,
-    upDate
+    ino
   } = ctx.request.body
 
   // 查看是否登录
@@ -56,7 +55,7 @@ router.post('/addStudent', async (ctx) => {
       age,
       className,
       ino,
-      upDate
+      upDate: Date.now()
     })
     if (newStudent) {
       ctx.body = {
@@ -72,6 +71,34 @@ router.post('/addStudent', async (ctx) => {
   }
   
 })
+
+// 更新学生照片
+router.post('/updatePhoto', async (ctx) => {
+  const {photo, name} = ctx.request.body
+  if (ctx.isAuthenticated()) {
+    const user = await Student.find({name})
+    const info = await Student.where({name})
+              .update({photo})
+
+    if (info.ok === 1) {
+      ctx.body = {
+        code: 0,
+        msg: '修改头像成功'
+      } 
+    } else {
+      ctx.body = {
+        code: -1,
+        msg: '修改头像失败'
+      } 
+    }
+  } else {
+    ctx.body = {
+      code: 407,
+      msg: '登录超时'
+    }
+  }
+})
+
 
 router.get('/list', async (ctx) => {
   if (ctx.isAuthenticated()) {
