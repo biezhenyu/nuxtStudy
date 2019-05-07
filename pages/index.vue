@@ -24,7 +24,7 @@
           <span class="classname">{{item.className}}</span>
           <span class="sno">{{item.ino}}</span>
         </div>
-        <div class="student-upate" :class="[item.infoErr ? 'infoError' : 'infoNormal']">{{'照片最近更新：' + item.upDate}}</div>
+        <div class="student-upate" :class="[item.infoErr ? 'infoError' : 'infoNormal']">{{'照片最近更新：' + item.upDate + user.email}}</div>
         <div class="line"></div>
 
         <div class="student-common student-guide"></div>
@@ -50,6 +50,8 @@
 const {config} = require('../config')
 import util from '../util/index.js'
 import homeHeader from '../components/Header'
+import moment from 'moment'
+
 
 export default {
   data() {
@@ -57,7 +59,8 @@ export default {
       active: 0,
       students: [],
       defaultIcon: require('../assets/images/defaulthead.png'),
-      loginOutShow: false
+      loginOutShow: false,
+      user: {}
     }
   },
   components: {
@@ -65,13 +68,14 @@ export default {
   },
   created() {
     this._getStudents()
+    this._getUSer()
   },
   mounted() {
   },
   methods: {
     onLoad() {
       this.getStudents()
-      this._getUSer()
+      
      
     },
 
@@ -82,6 +86,7 @@ export default {
         this.students = data.students
         this.students.map(item => {
           this.$set(item, 'infoErr', false)
+          item.upDate = moment(item.upDate).format('YYYY-MM-DD')
           return item
         })
         // console.log('this.students: ', this.students);
@@ -90,7 +95,10 @@ export default {
 
     async _getUSer() {
       let {status, data} = await this.$axios.get(`${config[process.env.NODE_ENV].api}/users/getUser`)
-      console.log(data)
+      util.handleRequest(status, () => {
+        this.user.email = data.email
+        console.log(this.user)
+      })
     },
     async getStudents() {
       let { status, data: {list} } = await this.$axios.get(`${config[process.env.NODE_ENV].api}/student/list`, {})

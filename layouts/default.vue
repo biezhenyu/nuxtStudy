@@ -34,24 +34,7 @@ export default {
   },
 
   mounted() {
-
-    // 重置字体
-    (function(doc, win) {
-      var docEl = doc.documentElement,
-      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-      recalc = function() {
-        var clientWidth = docEl.clientWidth;
-        if (!clientWidth) return;
-        if (docEl.clientWidth > docEl.clientHeight) {
-          docEl.style.fontSize = docEl.clientHeight / 10 + 'px';
-        } else {
-          docEl.style.fontSize = docEl.clientWidth / 10 + 'px';
-        }
-      }
-      if (!doc.addEventListener) return;
-      win.addEventListener(resizeEvt, recalc, false);
-      doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);
+    
 
     if (sessionStorage.getItem('active')) {
       let active = parseInt(sessionStorage.getItem('active'))

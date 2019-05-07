@@ -79,11 +79,6 @@ export default {
           Toast.fail(data.msg);
         }
       })
-      
-      // this.timer = setTimeout(() => {
-      //   this.$router.push({path: "/home"})  
-      // }, 500)
-     
     },
 
     submit() {
