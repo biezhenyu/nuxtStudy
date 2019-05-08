@@ -1,7 +1,10 @@
 <template>
   <div class="me">
     <homeHeader @loginOut="loginOutShow = true"></homeHeader>
-    <button @click="add">添加</button>
+
+    <van-cell-group class="cellGroup">
+      <van-cell @click="location.href= '/addstudent' " title="添加学生" icon="add-o" is-link />
+    </van-cell-group>
 
   </div>
 </template>
@@ -58,5 +61,8 @@ export default {
   background: #fff;
   .pt(46);
   .pb(180);
+  .cellGroup {
+    .mt(50);
+  }
 }
 </style>
