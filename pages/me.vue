@@ -3,7 +3,7 @@
     <homeHeader @loginOut="loginOutShow = true"></homeHeader>
 
     <van-cell-group class="cellGroup">
-      <van-cell @click="location.href= '/addstudent' " title="添加学生" icon="add-o" is-link />
+      <van-cell @click="go" title="添加学生" icon="add-o" is-link />
     </van-cell-group>
 
   </div>
@@ -51,6 +51,9 @@ export default {
       }
     },
     cancel() {},
+    go() {
+      location.href= '/addstudent'
+    }
   }
 }
 </script>

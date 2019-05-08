@@ -34,8 +34,6 @@ export default {
   },
 
   mounted() {
-    
-
     if (sessionStorage.getItem('active')) {
       let active = parseInt(sessionStorage.getItem('active'))
       this.active = active
@@ -45,6 +43,8 @@ export default {
     this._handleTabbar()
    
   }
+
+  
 }
 </script>
 
