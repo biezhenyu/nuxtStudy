@@ -70,6 +70,7 @@ export default {
     },
 
     async _register() {
+      
       const {status, data} = await this.$axios.post(`${config[process.env.NODE_ENV].api}/users/signUp`, {
         username: encodeURIComponent(this.user.username),
 

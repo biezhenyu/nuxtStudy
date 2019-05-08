@@ -1,7 +1,7 @@
 <template>
   <div class="homeHeader">
-    <img class="icon" :src="src" alt="">
-    <span class="name">{{user.name}}</span>
+    <img class="homeHeader-icon" :src="src" alt="">
+    <span class="homeHeader-name">{{user.name}}</span>
     <span @click="loginOut" class="loginOut"></span>
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
       let {status, data} = await this.$axios.get(`${config[process.env.NODE_ENV].api}/users/getUser`)
       util.handleRequest(status, () => {
         this.user.email = data.email
-        this.user.name = data.username
+        this.user.name = decodeURIComponent(data.username)
         console.log('this.user: ', this.user);
         
       })
@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 @import '../assets/less/bass.less';
 .homeHeader {
   position: relative;
@@ -64,7 +64,7 @@ export default {
   .mt(40);
   background:linear-gradient(159deg,rgba(85,190,249,1) 0%,rgba(52,223,203,1) 82%,rgba(57,226,186,1) 100%);
 
-  .icon {
+  &-icon {
     float: left;
     .w(98);
     .h(98);
@@ -72,7 +72,7 @@ export default {
     .ml(46);
     border-radius: 50%;
   }
-  .name {
+  &-name {
     float: left;
     .ml(48);
   }

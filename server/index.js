@@ -76,7 +76,13 @@ async function start() {
   app.use(students.routes()).use(students.allowedMethods())
   app.use(users.routes()).use(users.allowedMethods())
 
+
   app.use(ctx => {
+
+    // 设置页面访问次数
+    let n = ctx.session.views || 0;
+    ctx.session.views = ++n;
+
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
     ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
