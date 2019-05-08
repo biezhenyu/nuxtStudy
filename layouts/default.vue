@@ -22,7 +22,7 @@ export default {
     },
 
     _handleTabbar() {
-      const tabs = ['login', 'register', 'reset']
+      const tabs = ['login', 'register', 'reset', 'addstudent']
       this.tabBarShow = !tabs.some(item => item === this.$route.name)
     }
 
