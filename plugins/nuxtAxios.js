@@ -1,3 +1,4 @@
+import {Toast} from 'vant';
 export default function ({ $axios, redirect, req, store, route, app }) {
   $axios.onRequest(config => {})
   $axios.onResponse((res) => {
@@ -7,9 +8,11 @@ export default function ({ $axios, redirect, req, store, route, app }) {
     }
   })
   $axios.onError(err => {
-    if (err) {
-      location.href = '/login'
-    }
+    Toast.fail(`服务器出错，错误码404`)
+    // if (err) {
+    //   location.href = '/login'
+    // }
     
   })
+
 }

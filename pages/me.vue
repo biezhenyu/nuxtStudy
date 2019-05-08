@@ -4,6 +4,7 @@
 
     <van-cell-group class="cellGroup">
       <van-cell @click="go" title="添加学生" icon="add-o" is-link />
+      <van-cell @click="del" title="删除学生" icon="close" is-link />
     </van-cell-group>
 
   </div>
@@ -22,6 +23,9 @@ export default {
   },
   created() {
     
+  },
+  mounted() {
+    localStorage.setItem('active', 0)
   },
   components: {
     homeHeader
@@ -42,7 +46,10 @@ export default {
     },
     cancel() {},
     go() {
-      location.href= '/addstudent'
+      location.href = '/addstudent'
+    },
+    del() {
+      location.href = '/delStudent'
     }
   }
 }

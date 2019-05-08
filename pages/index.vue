@@ -73,23 +73,16 @@ export default {
   mounted() {
   },
   methods: {
-    onLoad() {
-      this.getStudents()
-      
-     
-    },
 
     async _getStudents() {
       let {status, data} = await this.$axios.get(`${config[process.env.NODE_ENV].api}/student/students`)
       util.handleRequest(status, () => {
-
         this.students = data.students
         this.students.map(item => {
           this.$set(item, 'infoErr', false)
           item.upDate = moment(item.upDate).format('YYYY-MM-DD')
           return item
         })
-        // console.log('this.students: ', this.students);
       })
     },
 
@@ -98,19 +91,7 @@ export default {
       util.handleRequest(status, () => {
         this.user.email = data.email
         this.user.name = data.username
-        console.log(this.user)
       })
-    },
-    async getStudents() {
-      let { status, data: {list} } = await this.$axios.get(`${config[process.env.NODE_ENV].api}/student/list`, {})
-
-      this.loading = false;
-
-      if (list.length === 0) {
-        this.finished = true;
-      } else {
-        this.students = this.students.concat(list)
-      }
     },
 
     async confirm() {
