@@ -75,27 +75,18 @@ router.post('/login', async (ctx, next) => {
 // 获取用户信息
 router.get('/getUser', async (ctx, next) => {
 
-  // isAuthenticated passport方法
-  if (ctx.isAuthenticated) {
-    // 获取session信息
-    if (ctx.session.passport) {
-      const {username, address} = ctx.session.passport.user
-      ctx.body = {
-        username,
-        email: address
-      } 
-    } else {
-      ctx.body = {
-        code: 407,
-        msg: '登录超时'
-      }
-    }
-    
+  // 获取session信息
+  if (ctx.session.passport) {
+    const {username, address} = ctx.session.passport.user
+    ctx.body = {
+      username,
+      email: address
+    } 
   } else {
     ctx.body = {
-      user: '',
-      email: ''
-    } 
+      code: 407,
+      msg: '登录超时'
+    }
   }
 })
 

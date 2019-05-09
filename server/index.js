@@ -27,6 +27,9 @@ config.dev = !(app.env === 'production')
 const students = require('./interface/students')
 const users = require('./interface/users')
 
+// 中间键
+const handleTimeOut = require('./middleware/handleTimeOut')
+
 // 处理post请求
 app.use(bodyParser({
   extendTypes: ['json', 'form', 'text']
@@ -72,9 +75,18 @@ async function start() {
     await nuxt.ready()
   }
 
+  // 定义不需要验证的接口
+  const check = {'/users/login': true, '/users/signUp': true, '/users/reset': true, '/users/getUser': false, '/users/loginOut': false,
+                '/student/students': false, '/student/addStudent': false, '/student/updatePhoto': false, '/student/del': false,'/student/list': false}
+
+  // 中间键
+  app.use(handleTimeOut(check))
+
   // 使用路由
   app.use(students.routes()).use(students.allowedMethods())
   app.use(users.routes()).use(users.allowedMethods())
+
+
 
 
   app.use(ctx => {
